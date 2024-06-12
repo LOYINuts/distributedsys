@@ -1,3 +1,3 @@
-module github.com/LOYINuts/distributedsys
+module distributedsys
 
 go 1.22.3
