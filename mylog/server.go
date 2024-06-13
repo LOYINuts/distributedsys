@@ -26,7 +26,7 @@ func (fl filelog) Write(data []byte) (int, error) {
 func Run(dest string) {
 	// 参数:io.Writer,前缀，flag
 	// 日期+时间
-	slog = log.New(filelog(dest), "LOYINuts", log.LstdFlags)
+	slog = log.New(filelog(dest), "LOYINuts:", log.LstdFlags)
 }
 
 func RegisterHandlers() {
