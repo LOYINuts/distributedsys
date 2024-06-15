@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"distributedsys/mylog"
+	"distributedsys/registry"
 	"distributedsys/service"
 	"fmt"
 	"log"
@@ -11,13 +12,19 @@ import (
 func main() {
 	mylog.Run("./distributed.log")
 	host, port := "localhost", "8888"
+	serviceAddress := fmt.Sprintf("http://%s:%s", host, port)
+	r := registry.Registration{
+		ServiceName: "Log Service",
+		ServiceURL:  serviceAddress,
+	}
 	ctx, err := service.Start(
 		context.Background(),
-		"Log Service",
 		host,
 		port,
+		r,
 		mylog.RegisterHandlers,
 	)
+	// 服务没有注册成功的话会返回错误服务会进行关闭
 	if err != nil {
 		log.Fatalln(err)
 	}
